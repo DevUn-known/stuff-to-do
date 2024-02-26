@@ -3,25 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+
+    <link rel="stylesheet" href="./style.css">
     <title>StuffToDo</title>
 </head>
 <body>
-    <div id="nav-bar">
-        <div id="nav-left">logo</div>
-        <div id="nav-right">stuff</div>
-    </div>
-    <div id="main">
+    <div id="container-main">
+        <div id="nav-bar">
+            <div id="nav-left">logo</div>
+            <div id="nav-right">stuff</div>
+        </div>
         <div id="tasks">
             <ul>
-                <li>task1</li>
-                <li>task2</li>
-                <li>task3</li>
-            </ul>
+                <li>
+                    <span class="checkbox"></span>
+                    <input class="task-title" type="text" value="task 1" disabled>
+                </li>
+                <li>
+                    <span class="checkbox"></span>
+                    <input class="task-title" type="text" value="task 2" disabled>
+                </li>
+                <li>
+                    <span class="checkbox"></span>
+                    <input class="task-title" type="text" value="task 3" disabled>
+                </li>
         </div>
         <form id="new-task">
             <input type="text" id="new-task-title">
             <button type="submit" id="task-create-btn">+</button>
         </form>
     </div>
+    <script src="brapp.js"></script>
 </body>
 </html>

@@ -11,4 +11,4 @@ app.get('/api/v1/', (req, res) => {
     res.status(200).json({item: 'requrest', status: 'success'});
 })
 
-app.listen(port, () => {console.log(`The server is listening on port ${port}`)});
+app.listen(port, () => {console.log(`The server is listening on port ${port}`)});   

@@ -23,6 +23,10 @@ li {
   list-style: none;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Group styles */
 
 #nav-bar, #tasks {
@@ -64,21 +68,35 @@ li {
 }
 
 #tasks li {
-  display: flex;
+  display: inline-grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr;
   background-color: var(--back-pri);
   width: 100%;
   margin: 0.75em auto;
   padding: 0.75em;
   border-radius: 10px;
-  align-items: center;
 }
 
 .task-title {
   color: black;
-  background-color: transparent;
+  width: 80%;
+  background-color: white;
   font-size: 1.5rem;
   font-weight: 400;
   border: none;
+  border-bottom: 2px solid lightgrey;
+  padding: 0.15em 0.25em;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.task-title:disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.task-title:focus {
+  outline: none;
 }
 
 .striked {
@@ -116,6 +134,33 @@ li {
   border-left: none;
   border-top: none;
   transform: rotate(40deg) translateY(-50%);
+}
+
+/* task buttons */
+
+#tasks li button {
+  font-size: 1.75rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 3px #b7b7b7);
+  transition: transform 0.1s;
+}
+
+#tasks li button:active {
+  transform: translateY(5px);
+}
+
+button.edit {
+  color: #75A45E;
+}
+
+button.save {
+  color: dodgerblue;
+}
+
+button.delete {
+  color: red;
 }
 
 @media (max-width: 434px){

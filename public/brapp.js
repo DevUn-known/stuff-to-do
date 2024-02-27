@@ -12,8 +12,7 @@ tasks.forEach(task => {
         titleInput.classList.toggle('striked');
     });
     // buttons
-    const editBtn = task.querySelector('button.edit');
-    console.log(editBtn);
+    const editBtn = task.querySelector('button.edit')
     const saveBtn = task.querySelector('button.save');
     const deleteBtn = task.querySelector('button.delete');
     editBtn.addEventListener('click', e => {
@@ -28,10 +27,8 @@ tasks.forEach(task => {
     saveBtn.addEventListener('click', e => {
         setTimeout(() => {
             saveBtn.classList.add('hidden');
-            console.log(editBtn.classList);
             editBtn.classList.remove('hidden');
             titleInput.disabled = true;
-            console.log(titleInput.disabled);
         }), 1000
     });
 });

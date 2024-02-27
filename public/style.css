@@ -30,17 +30,17 @@ li {
 /* Group styles */
 
 #nav-bar, #tasks {
-  box-shadow: 0 0 6px 1px lightgrey;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
 }
 
 #tasks li {
-  box-shadow: 0 0 5px 1px lightgrey;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
 }
 
 #nav-bar, #tasks {
   background-color: var(--back-sec);
-  margin: 1em auto;
-  border-radius: 20px;
+  margin: 2em auto;
+  border-radius: 30px;
   padding: 1.25em;
 }
 
@@ -74,7 +74,8 @@ li {
   width: 100%;
   margin: 0.75em auto;
   padding: 0.75em;
-  border-radius: 10px;
+  border-radius: 20px;
+  align-items: center;
 }
 
 .task-title {
@@ -143,8 +144,11 @@ li {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  filter: drop-shadow(0 0 3px #b7b7b7);
   transition: transform 0.1s;
+}
+
+#tasks li button i {
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
 }
 
 #tasks li button:active {

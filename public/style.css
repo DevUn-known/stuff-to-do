@@ -294,10 +294,16 @@ button.delete {
   #container-main  {
     width: 100%;
   }
+  #nav-bar {
+    margin: 0;
+    border-radius: 0;
+  }
+  #tasks {
+    margin-bottom: 0;
+  }
   #tasks li {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    
   }
   .task-title {
     width: 100%;

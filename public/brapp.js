@@ -9,7 +9,9 @@ const addTask = (str, id) => {
                 <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
                 <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
             </div>
-            <button type="button" class="delete"><i class="fa-solid fa-trash"></i></button>
+            <div class="delete-btn">
+                <button type="button" class="delete"><i class="fa-solid fa-trash"></i></button>
+            </div>
         </li>
     `
 }

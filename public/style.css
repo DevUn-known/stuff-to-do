@@ -10,10 +10,6 @@
     padding: 0;
 }
 
-html {
-  height: 100vh;
-}
-
 /* $General tags */
 
 body{
@@ -31,17 +27,14 @@ li {
 
 /* $Group styles */
 
-#nav-bar, #tasks {
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-}
+#nav-bar, #tasks { box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1); }
 
-#tasks li {
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-}
+#tasks li { box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1); }
+
+#nav-bar, #tasks, #new-task { margin: 1.5em auto; }
 
 #nav-bar, #tasks {
   background-color: var(--back-sec);
-  margin: 2em auto;
   border-radius: 20px;
   padding: 1.25em;
 }
@@ -49,8 +42,13 @@ li {
 /* $Containers */
 
 #container-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 95%;
-    max-width: 760px;
+    height: 100vh;
+    max-height: 680px;
+    max-width: 780px;
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -62,7 +60,7 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 1.5em 2.25em;
-  
+  width: 100%;
 }
 
 #nav-right {
@@ -118,6 +116,8 @@ li {
 #tasks {
   font-family: "Anonymous Pro", monospace;
   font-weight: 400;
+  max-height: 70%;
+  overflow: scroll;
 }
 
 #tasks li {
@@ -133,7 +133,7 @@ li {
 
 .task-title {
   color: black;
-  width: 80%;
+  width: 100%;
   background-color: white;
   font-size: 1.5rem;
   font-weight: 400;
@@ -192,6 +192,10 @@ li {
 
 /* -$task buttons */
 
+#tasks .update-btns, #tasks .delete-btn {
+  text-align: right;
+}
+
 #tasks li button {
   font-size: 1.75rem;
   background-color: transparent;
@@ -244,14 +248,18 @@ button.delete {
 
 #task-create-btn {
   width: 60px;
+  height: 60px;
   position: relative;
   background-color: #7DC591;
   font-size: 3rem;
   font-weight: bold;
   border: none;
   border-radius: 50%;
+  margin-left: 0.5em;
   transition: background-color 0.2s;
   cursor: pointer;
+  box-shadow: 0 2px 10px 1px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
 }
 
 #task-create-btn:hover {
@@ -259,7 +267,7 @@ button.delete {
 }
 
 #task-create-btn:active {
-  background-color: #4a7556;
+  transform: scale(0.9);
 }
 
 #task-create-btn::before , #task-create-btn::after {
@@ -282,8 +290,30 @@ button.delete {
   height: 8px;
 }
 
-@media (max-width: 434px){
-  #container-main {
+@media (max-width: 540px){
+  #container-main  {
     width: 100%;
+  }
+  #tasks li {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    
+  }
+  .task-title {
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-bottom: 0.75em;
+  }
+  .checkbox {
+    grid-row-start: 2;
+    margin-left: 0.25em;
+  }
+  #new-task {
+    flex-direction: column;
+    align-items: center;
+  }
+  #task-create-btn {
+    margin-top: 0.25em;
   }
 }

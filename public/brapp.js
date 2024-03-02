@@ -76,3 +76,13 @@ addBtn.addEventListener('click', e => {
     taskInput.value = '';
     refresh();
 })
+
+/* $side menu */
+
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+
+menuBtn.addEventListener('click', e => {
+    sideMenu.classList.toggle('show');
+    menuBtn.classList.toggle('open');
+})

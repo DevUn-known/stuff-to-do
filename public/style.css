@@ -13,7 +13,7 @@
 /* $General tags */
 
 html {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body{

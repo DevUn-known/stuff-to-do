@@ -86,3 +86,19 @@ menuBtn.addEventListener('click', e => {
     sideMenu.classList.toggle('show');
     menuBtn.classList.toggle('open');
 })
+
+/* settings */
+
+const settingsBtns = document.querySelectorAll('button.settings');
+const closeSettingsBtn = document.querySelector('#settings-modal button.modal-close-btn');
+const settingsModal = document.querySelector('#settings-modal');
+
+settingsBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+        settingsModal.classList.remove('hidden')
+    })
+});
+
+closeSettingsBtn.addEventListener('click', e => {
+    settingsModal.classList.add('hidden');
+})

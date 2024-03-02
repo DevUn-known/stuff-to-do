@@ -17,10 +17,10 @@ html {
 }
 
 body{
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--back-pri);
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 li { list-style: none; }

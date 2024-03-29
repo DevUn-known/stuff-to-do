@@ -1,4 +1,10 @@
 const loginBtn = document.getElementById('login-btn');
+const forgotPassBtn = document.getElementById('forgot-password-btn');
+const otpMsg = document.getElementById('otp-msg-box');
+
+forgotPassBtn.addEventListener('click', e => {
+    otpMsg.classList.add('show');
+})
 
 loginBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -19,5 +25,4 @@ loginBtn.addEventListener('click', e => {
     if (validCreds) {
         window.location.assign('/dashboard.html');
     }
-
 })

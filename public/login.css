@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+html {
+  font-size: 16px;
+  --base-line-height: 20px;
+}
+
+body {
+  min-height: 100%;
+  padding: 1.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+button, input[type="submit"], input[type="button"]{cursor: pointer;}
+
+#main-container {
+  margin: 0 auto 3.125em;
+  padding: 2.5em;
+  border-radius: 1.25em;
+  box-shadow: 0 0 1.25em 0 rgba(0, 0, 0, 0.2);
+}
+
+#page-title {
+  display: block;
+  font-size: 2rem;
+}
+
+#page-title, form input, #otp-msg-box{
+  margin-bottom: 1.5rem;
+}
+
+.alert-msg {display:none;}
+
+.alert-msg.show {display: block;}
+
+#email-validation-box, #password-validation-box {
+  background-color: #ffcbcb;
+  border: 2px dotted #e61b1b;
+  border-radius: 20px;
+  color: #e61b1b;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+form input[type="email"], form input[type="password"] {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.15rem;
+  padding: 0.45em 0 0.35em 0;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #000;
+  border-radius: 5px 5px 0 0;
+}
+
+form input[type="email"]:focus, form input[type="password"]:focus {
+  padding-left: 0.65rem;
+  background-color: rgb(241, 241, 241);
+}
+
+form input[type="email"], form input[type="password"] {
+  display: block;
+  width: 100%;
+  transition: background-color  .2s ease-in-out, padding .2s ease-in-out;
+}
+
+#forgot-password-btn, #otp-msg-box {
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+
+#forgot-password-btn, #login-btn {
+  font-family: "Anonymous Pro", monospace;
+  font-weight: bold;
+}
+
+#forgot-password-btn {
+  background-color: transparent;
+  font-size: 1.15rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#otp-msg-box {
+  font-size: 0.9rem;
+}
+
+#login-btn-container, #signup-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+#login-btn {
+  font-size: 1.25rem;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  border-radius: 45px;
+  transition: background-color  .2s ease-in-out, color  .2s ease-in-out;
+}
+
+#login-btn:hover, #login-btn:active{
+  color: #fff;
+  background-color: #000;
+}
+
+@media screen and (max-width: 25em) {
+  #main-container {
+    padding: 1.25em;
+  }
+}

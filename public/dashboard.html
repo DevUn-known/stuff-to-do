@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');</style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');</style>
+
+    <link rel="stylesheet" href="./dashboard.css">
+    <title>StuffToDo</title>
+</head>
+<body>
+    <div id="settings-modal" class="modal-container hidden">
+        <section class="modal">
+            <button class="modal-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button id="delete-all-btn">delete all</button>
+            <button id="log-out-btn">log out</button>
+        </section>
+    </div>
+    <div id="container-main">
+
+        <!-- nav bar -->
+
+        <div id="nav-bar">
+            <div id="nav-left">
+                <span id="app-title">To Do</span>
+            </div>
+            <div id="nav-right">
+                <button class="profile-preview">
+                    <span class="title">user</span>
+                    <i class="fa-solid fa-user user-img"></i>
+                </button>
+                <button class="settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+            <button id="menu-btn">
+                <span id="menu-bar"></span>
+            </button>
+            <div id="side-menu">
+                <button class="profile-preview">
+                    <span class="title">user</span>
+                    <i class="fa-solid fa-user user-img"></i>
+                </button>
+                <button class="settings">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- tasks -->
+
+        <div id="tasks">
+            <ul>
+                
+            </ul>
+        </div>
+        
+        <!-- new task form -->
+
+        <form id="new-task">
+            <input type="text" id="new-task-title" placeholder="enter new task here">
+            <div>
+                <button type="submit" id="task-create-btn"></button>
+            </div>
+        </form>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

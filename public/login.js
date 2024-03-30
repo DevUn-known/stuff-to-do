@@ -23,6 +23,6 @@ loginBtn.addEventListener('click', e => {
         validCreds  = false;
     } else passMsg.classList.remove('show');
     if (validCreds) {
-        window.location.assign('/dashboard.html');
+        window.location.replace('/dashboard.html');
     }
 })

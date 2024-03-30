@@ -4,6 +4,10 @@
 :root {
   --back-pri: #F7F7F8;
   --back-sec: #FFFFFF;
+  --purple1-light: #401F71;
+  --purple1-dark: #3c1e68;
+  --purple2-light: #824D74;
+  --purple2-dark: #724466;
 }
 
 * {
@@ -306,7 +310,8 @@ button {
 }
 
 .checkbox.checked {
-  background-color: #86BF59;
+  /* background-color: #86BF59; */
+  background-color: var(--purple1-light);
 }
 
 .checkbox.checked::after {
@@ -346,15 +351,18 @@ button {
 }
 
 button.edit {
-  color: #75A45E;
+  /* color: #75A45E; */
+  color: var(--purple1-light);
 }
 
 button.save {
-  color: dodgerblue;
+  /* color: dodgerblue; */
+  color: var(--purple1-light);
 }
 
 button.delete {
-  color: red;
+  /* color: red; */
+  color: var(--purple1-light);
 }
 
 /* $create task form */
@@ -383,7 +391,8 @@ button.delete {
   width: 60px;
   height: 60px;
   position: relative;
-  background-color: #7DC591;
+  /* background-color: #7DC591; */
+  background-color: var(--purple2-light);
   font-size: 3rem;
   font-weight: bold;
   border: none;
@@ -396,7 +405,8 @@ button.delete {
 }
 
 #task-create-btn:hover {
-  background-color: #5ea873;
+  /* background-color: #5ea873; */
+  background-color: var(--purple2-dark)
 }
 
 #task-create-btn:active {

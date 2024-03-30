@@ -16,20 +16,20 @@ const addTask = (str, id) => {
     `
 }
 
-//const data = ['walk the dog', 'get groceries', 'cook lunch', 'wash the car'];
+const data = ['walk the dog', 'get groceries', 'cook lunch', 'wash the car'];
 
 const taskSection = document.getElementById('tasks');
 const taskContainer = document.querySelector('#tasks ul');
 
-// data.forEach((str, i) => {
-//     addTask(str, i);
-// })
+data.forEach((str, i) => {
+    addTask(str, i);
+})
 
 // <-- $tasks -->
 const refresh = () => {
     const tasks = document.querySelectorAll('#tasks li');
-    if (!tasks.length) taskSection.classList.add('hidden');
-    else taskSection.classList.remove('hidden');
+    // if (!tasks.length) taskSection.classList.add('hidden');
+    // else taskSection.classList.remove('hidden');
     tasks.forEach(task => {
         const titleInput = task.querySelector('input.task-title');
         titleInput.disabled = true;
@@ -61,7 +61,6 @@ const refresh = () => {
         });
         deleteBtn.addEventListener('click', e => {
             taskContainer.removeChild(task);
-            refresh();
         })
     });
 }

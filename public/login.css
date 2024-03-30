@@ -39,19 +39,31 @@ button, input[type="submit"], input[type="button"]{cursor: pointer;}
   font-size: 2rem;
 }
 
-#page-title, form input, #otp-msg-box{
+#page-title, form input, #otp-msg-box.show{
   margin-bottom: 1.5rem;
 }
 
-.alert-msg {display:none;}
+.alert-msg {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
 
-.alert-msg.show {display: block;}
+.alert-msg.show {
+  height: auto;
+  opacity: 1;
+}
 
 #email-validation-box, #password-validation-box {
+  color: #e61b1b;
+}
+
+#email-validation-box.show, #password-validation-box.show {
   background-color: #ffcbcb;
   border: 2px dotted #e61b1b;
   border-radius: 20px;
-  color: #e61b1b;
+  
   padding: 1rem;
   margin-bottom: 1rem;
 }
@@ -78,6 +90,7 @@ form input[type="email"], form input[type="password"] {
 }
 
 #forgot-password-btn, #otp-msg-box {
+  display: block;
   text-align: right;
   width: 100%;
 }

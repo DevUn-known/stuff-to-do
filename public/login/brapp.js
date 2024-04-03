@@ -18,11 +18,11 @@ loginBtn.addEventListener('click', e => {
         emailMsg.classList.add('show');
         validCreds = false;
     } else emailMsg.classList.remove('show');
-    if (password.length < 8){
+    if (!password.length){
         passMsg.classList.add('show');
         validCreds  = false;
     } else passMsg.classList.remove('show');
     if (validCreds) {
-        window.location.replace('/dashboard.html');
+        window.location.replace('/lists/');
     }
 })

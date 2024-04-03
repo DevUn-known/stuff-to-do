@@ -122,9 +122,36 @@ button {
   width: 100%;
 }
 
-#nav-right {
+button.btn-invert {
+  color: white;
+  background-color: var(--purple2-light);
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 1px rgba(0,0,0,0.2);
+  padding: 0.35rem 0.5rem;
+  transition: transform 0.2s;
+}
+
+button.btn-invert:hover {
+  background-color: var(--purple2-dark)
+  
+}
+
+button.btn-invert:active {
+  transform: scale(0.9);
+}
+
+#nav-right, #nav-left {
   display: flex;
   align-items: center;
+}
+
+#nav-left > * {
+  margin-right: 0.5rem;
 }
 
 #menu-btn {
@@ -245,7 +272,6 @@ button {
 /* $tasks */
 
 #tasks {
-  font-family: "Anonymous Pro", monospace;
   width: 100%;
   font-weight: 400;
   max-height: 70%;

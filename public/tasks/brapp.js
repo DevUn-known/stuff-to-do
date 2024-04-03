@@ -4,7 +4,7 @@ const addTask = (str, id) => {
     taskContainer.innerHTML += `
         <li data-id="${id}">
             <span class="checkbox"></span>
-            <input class="task-title" type="text" value="${str}" disabled="true">
+            <input class="task-title" type="text" value="${str.slice(0,1).toUpperCase() + str.slice(1)}" disabled="true">
             <div class="update-btns">
                 <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
                 <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
@@ -16,7 +16,15 @@ const addTask = (str, id) => {
     `
 }
 
-const data = ['walk the dog', 'get groceries', 'cook lunch', 'wash the car'];
+const data = ['Onion (2kg)', 'Milk (2 packets)', 'Carrot (1kg)', 'lemon (0.5kg)'];
+
+// <-- $back -->
+
+const backBtn = document.getElementById('back-btn');
+
+backBtn.addEventListener('click', e => {
+    window.location.replace('/lists/');
+})
 
 const taskSection = document.getElementById('tasks');
 const taskContainer = document.querySelector('#tasks ul');

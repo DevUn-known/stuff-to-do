@@ -145,9 +145,10 @@ button.btn-invert:active {
   transform: scale(0.9);
 }
 
-#nav-right, #nav-left {
+#nav-left {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 #nav-left > * {
@@ -234,7 +235,7 @@ button.btn-invert:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 45%
+  width: 100%;
 }
 
 input.list-title {
@@ -255,14 +256,6 @@ input.list-title {
 #tasks ul {
   display: flex;
   flex-direction: column-reverse;
-}
-
-#list-title-display, #tasks li {
-
-}
-
-#list-title-display {
-
 }
 
 #tasks li {
@@ -459,9 +452,6 @@ button.delete {
   #tasks li {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-  }
-  #list-title-display {
-    width: 100%;
   }
   .task-title {
     width: 100%;

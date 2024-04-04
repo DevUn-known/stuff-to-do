@@ -1,3 +1,36 @@
+const listTitleDis = document.getElementById('list-title-display');
+
+listTitleDis.dataset.id = `${Math.ceil(Math.random() * 10)}`;
+const listName = 'grocery list';
+
+listTitleDis.innerHTML = `
+    <input class="list-title" type="text" value="${listName.slice(0,1).toUpperCase() + listName.slice(1)}" disabled="true">
+    <div class="update-btns">
+        <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
+        <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
+    </div>
+`;
+
+const listInput = listTitleDis.querySelector('.list-title');
+const editBtn = listTitleDis.querySelector('button.edit')
+const saveBtn = listTitleDis.querySelector('button.save');
+editBtn.addEventListener('click', e => {
+    setTimeout(() => {
+        editBtn.classList.add('hidden');
+        saveBtn.classList.remove('hidden');
+        listInput.disabled = false;
+        listInput.focus();
+        listInput.select();
+    }), 1000
+});
+saveBtn.addEventListener('click', e => {
+    setTimeout(() => {
+        saveBtn.classList.add('hidden');
+        editBtn.classList.remove('hidden');
+        listInput.disabled = true;
+    }), 1000
+});
+
 // <-- $populate -->
 
 const addTask = (str, id) => {
@@ -13,7 +46,7 @@ const addTask = (str, id) => {
                 <button type="button" class="delete"><i class="fa-solid fa-trash"></i></button>
             </div>
         </li>
-    `
+    `;
 }
 
 const data = ['Onion (2kg)', 'Milk (2 packets)', 'Carrot (1kg)', 'lemon (0.5kg)'];
@@ -39,6 +72,7 @@ const refresh = () => {
     // if (!tasks.length) taskSection.classList.add('hidden');
     // else taskSection.classList.remove('hidden');
     tasks.forEach(task => {
+        task.style.order = 0;
         const titleInput = task.querySelector('input.task-title');
         titleInput.disabled = true;
         // <---- $checkbox ----> //
@@ -46,6 +80,12 @@ const refresh = () => {
         checkbox.addEventListener('click', e => {
             checkbox.classList.toggle('checked');
             titleInput.classList.toggle('striked');
+            setTimeout(() => {
+                const orders = [...tasks].map(el => el.style.order);
+                if (checkbox.classList.contains('checked')){
+                    task.style.order = Math.max(...orders) - 1;
+                } else task.style.order = Math.min(...orders) + 1;
+            }, 500);
         });
         // <---- $button ----> //
         const editBtn = task.querySelector('button.edit')
@@ -85,16 +125,6 @@ addBtn.addEventListener('click', e => {
     if (taskInput.value) addTask(taskInput.value, Date.now());
     taskInput.value = '';
     refresh();
-})
-
-/* $side menu */
-
-const menuBtn = document.getElementById('menu-btn');
-const sideMenu = document.getElementById('side-menu');
-
-menuBtn.addEventListener('click', e => {
-    sideMenu.classList.toggle('show');
-    menuBtn.classList.toggle('open');
 })
 
 /* settings */

@@ -151,7 +151,7 @@ button.btn-invert:active {
 }
 
 #nav-left > * {
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 #menu-btn {
@@ -230,43 +230,17 @@ button.btn-invert:active {
   transform: rotateZ(-45deg);
 }
 
-#app-title {
+#list-title-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 45%
+}
+
+input.list-title {
   font-weight: bold;
   font-size: 1.75rem;
-}
 
-#side-menu .profile-preview, #side-menu .settings{
-  margin: 1em 0;
-}
-
-.profile-preview, .settings {
-  display: flex;
-  background-color: transparent;
-  border: none;
-  font-family: "Pacifico", cursive;
-  font-size: 1.5rem;
-  font-weight: bold;
-  align-items: center;
-  cursor: pointer;
-}
-
-.user-img { filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.3)); }
-
-.settings {
-  font-size: 2rem;
-  margin-left: 1em;
-  transition: transform 0.3s;
-}
-
-.settings:hover, .settings:active { transform: rotateZ(180deg); }
-
-.user-img {
-  background-color: black;
-  color: white;
-  border-radius: 50%;
-  outline: 4px solid black;
-  padding: 0.35em 0.25em 0 0.25em;
-  margin-left: 0.6em;
 }
 
 /* $tasks */
@@ -283,6 +257,14 @@ button.btn-invert:active {
   flex-direction: column-reverse;
 }
 
+#list-title-display, #tasks li {
+
+}
+
+#list-title-display {
+
+}
+
 #tasks li {
   display: inline-grid;
   grid-template-columns: 1fr 4fr 1fr 1fr;
@@ -294,7 +276,7 @@ button.btn-invert:active {
   align-items: center;
 }
 
-.task-title {
+.task-title, .list-title {
   color: black;
   width: 100%;
   background-color: white;
@@ -307,12 +289,12 @@ button.btn-invert:active {
   border-top-right-radius: 8px;
 }
 
-.task-title:disabled {
+.task-title:disabled, .list-title:disabled {
   background-color: transparent;
   border-color: transparent;
 }
 
-.task-title:focus {
+.task-title:focus, .list-title:focus {
   outline: none;
 }
 
@@ -360,7 +342,7 @@ button.btn-invert:active {
   text-align: right;
 }
 
-#tasks li button {
+#tasks li button, #list-title-display button{
   font-size: 1.75rem;
   background-color: transparent;
   border: none;
@@ -368,11 +350,11 @@ button.btn-invert:active {
   transition: transform 0.1s;
 }
 
-#tasks li button i {
+#tasks li button i, #list-title-display button i {
   filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
 }
 
-#tasks li button:active {
+#tasks li button:active, #list-title-display button:active {
   transform: translateY(5px);
 }
 
@@ -477,6 +459,9 @@ button.delete {
   #tasks li {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
+  }
+  #list-title-display {
+    width: 100%;
   }
   .task-title {
     width: 100%;

@@ -2,10 +2,18 @@
 
 // <div class="list-title">${str}<div>
 
+const handleError = err => {
+    const res = err.response;
+    alert(res.data.errorMessage);
+    if (res.status === 401){
+        window.location.assign('/login');
+    }
+}
+
 const addList = (str, id) => {
     listContainer.innerHTML += `
         <li data-id="${id}">
-            <div class="list-title">${str.slice(0,1).toUpperCase() + str.slice(1)}</div>
+            <div class="list-title">${str}</div>
             <div class="edit-btn">
                 <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
             </div>
@@ -16,32 +24,38 @@ const addList = (str, id) => {
     `
 }
 
-const data = ['grocery list'];
-
 const listSection = document.getElementById('lists');
 const listContainer = document.querySelector('#lists ul');
-
-data.forEach((str, i) => {
-    addList(str, i);
-})
 
 // <-- $lists -->
 const refresh = () => {
     const lists = document.querySelectorAll('#lists li');
+    if (!lists.length) listSection.classList.add('hidden');
+    else listSection.classList.remove('hidden');
     lists.forEach(list => {
         // <---- $button ----> //
         const editBtn = list.querySelector('button.edit');
         const deleteBtn = list.querySelector('button.delete');
+        const title = list.querySelector('.list-title').textContent;
         deleteBtn.addEventListener('click', e => {
-            listContainer.removeChild(list);
+            axios.delete('/api/v1/lists/' + list.dataset.id).then(res => {
+                listContainer.removeChild(list);
+            }).catch(err => handleError(err));
         })
+
         editBtn.addEventListener('click', e => {
-            window.location.replace('/tasks/');
+            window.location.replace(`/tasks?listId=${list.dataset.id}`);
         })
     });
 }
 
-refresh();
+axios.get('/api/v1/lists/').then(res => {
+    const lists = res.data;
+    lists.forEach(list => {
+        addList(list.title, list._id);
+    })
+    refresh();
+}).catch(err => handleError(err));
 
 /* $add form */
 
@@ -50,9 +64,13 @@ const listInput = document.getElementById('new-list-title');
 
 addBtn.addEventListener('click', e => {
     e.preventDefault();
-    if (listInput.value) addList(listInput.value, Date.now());
-    listInput.value = '';
-    refresh();
+    const title = listInput.value;
+    if (title)
+        axios.post('/api/v1/lists', {title}).then(res => {
+            addList(res.data.title, res.data.id);
+            listInput.value = '';
+            refresh();
+        }).catch(err => handleError(err));
 })
 
 /* $side menu */

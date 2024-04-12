@@ -1,43 +1,23 @@
+let listParam = new URL(window.location).searchParams.get('listId');
 const listTitleDis = document.getElementById('list-title-display');
 
-listTitleDis.dataset.id = `${Math.ceil(Math.random() * 10)}`;
-const listName = 'grocery list';
+const handleError = err => {
+    const res = err.response;
+    alert(res.data);
+    if (res.status === 401){
+        window.location.assign('/login');
+    }
+}
 
-listTitleDis.innerHTML = `
-    <input class="list-title" type="text" value="${listName.slice(0,1).toUpperCase() + listName.slice(1)}" disabled="true">
-    <div class="update-btns">
-        <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
-        <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
-    </div>
-`;
 
-const listInput = listTitleDis.querySelector('.list-title');
-const editBtn = listTitleDis.querySelector('button.edit')
-const saveBtn = listTitleDis.querySelector('button.save');
-editBtn.addEventListener('click', e => {
-    setTimeout(() => {
-        editBtn.classList.add('hidden');
-        saveBtn.classList.remove('hidden');
-        listInput.disabled = false;
-        listInput.focus();
-        listInput.select();
-    }), 1000
-});
-saveBtn.addEventListener('click', e => {
-    setTimeout(() => {
-        saveBtn.classList.add('hidden');
-        editBtn.classList.remove('hidden');
-        listInput.disabled = true;
-    }), 1000
-});
 
 // <-- $populate -->
 
-const addTask = (str, id) => {
+const addTask = (str, id, completed) => {
     taskContainer.innerHTML += `
         <li data-id="${id}">
-            <span class="checkbox"></span>
-            <input class="task-title" type="text" value="${str.slice(0,1).toUpperCase() + str.slice(1)}" disabled="true">
+            <span class="checkbox ${completed? 'checked' : ''}"></span>
+            <input class="task-title ${completed? 'striked' : ''}" type="text" value="${str}" disabled="true">
             <div class="update-btns">
                 <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
                 <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
@@ -49,7 +29,8 @@ const addTask = (str, id) => {
     `;
 }
 
-const data = ['Onion (2kg)', 'Milk (2 packets)', 'Carrot (1kg)', 'lemon (0.5kg)'];
+// const data = ['Onion (2kg)', 'Milk (2 packets)', 'Carrot (1kg)', 'lemon (0.5kg)'];
+const data = [];
 
 // <-- $back -->
 
@@ -62,15 +43,11 @@ backBtn.addEventListener('click', e => {
 const taskSection = document.getElementById('tasks');
 const taskContainer = document.querySelector('#tasks ul');
 
-data.forEach((str, i) => {
-    addTask(str, i);
-})
-
 // <-- $tasks -->
 const refresh = () => {
     const tasks = document.querySelectorAll('#tasks li');
-    // if (!tasks.length) taskSection.classList.add('hidden');
-    // else taskSection.classList.remove('hidden');
+    if (!tasks.length) taskSection.classList.add('hidden');
+    else taskSection.classList.remove('hidden');
     tasks.forEach(task => {
         task.style.order = 0;
         const titleInput = task.querySelector('input.task-title');
@@ -78,14 +55,19 @@ const refresh = () => {
         // <---- $checkbox ----> //
         const checkbox = task.querySelector(".checkbox");
         checkbox.addEventListener('click', e => {
-            checkbox.classList.toggle('checked');
-            titleInput.classList.toggle('striked');
-            setTimeout(() => {
-                const orders = [...tasks].map(el => el.style.order);
-                if (checkbox.classList.contains('checked')){
-                    task.style.order = Math.max(...orders) - 1;
-                } else task.style.order = Math.min(...orders) + 1;
-            }, 500);
+            axios.patch(
+                `/api/v1/tasks/${listParam}/${task.dataset.id}`,
+                {completed: !checkbox.classList.contains('checked')}
+            ).then(res => {
+                checkbox.classList.toggle('checked');
+                titleInput.classList.toggle('striked');
+                setTimeout(() => {
+                    const orders = [...tasks].map(el => el.style.order);
+                    if (checkbox.classList.contains('checked'))
+                        task.style.order = Math.max(...orders) - 1;
+                    else task.style.order = Math.min(...orders) + 1;
+                }, 500);
+            }).catch(err => handleError(err));
         });
         // <---- $button ----> //
         const editBtn = task.querySelector('button.edit')
@@ -101,19 +83,65 @@ const refresh = () => {
             }), 1000
         });
         saveBtn.addEventListener('click', e => {
-            setTimeout(() => {
-                saveBtn.classList.add('hidden');
-                editBtn.classList.remove('hidden');
-                titleInput.disabled = true;
-            }), 1000
+            axios.patch(`/api/v1/tasks/${listParam}/${task.dataset.id}`, {title: titleInput.value})
+            .then(res => { 
+                setTimeout(() => {
+                    saveBtn.classList.add('hidden');
+                    editBtn.classList.remove('hidden');
+                    titleInput.disabled = true;
+                }, 100);
+            }).catch(err => handleError(err));
         });
         deleteBtn.addEventListener('click', e => {
-            taskContainer.removeChild(task);
+            axios.delete(`/api/v1/tasks/${listParam}/${task.dataset.id}`).then(res => {
+                taskContainer.removeChild(task);
+            }).catch(err => handleError(err));
         })
     });
 }
 
-refresh();
+const setListTitle = (listTitle, id) => {
+    listTitleDis.dataset.id = id;
+    listTitleDis.innerHTML = `
+        <input class="list-title" type="text" value="${listTitle}" disabled="true">
+        <div class="update-btns">
+            <button type="button" class="edit"><i class="fa-solid fa-pencil"></i></button>
+            <button type="button" class="save hidden"><i class="fa-solid fa-floppy-disk"></i></button>
+        </div>
+    `;
+
+    const listInput = listTitleDis.querySelector('.list-title');
+    const editBtn = listTitleDis.querySelector('button.edit')
+    const saveBtn = listTitleDis.querySelector('button.save');
+    editBtn.addEventListener('click', e => {
+        setTimeout(() => {
+            editBtn.classList.add('hidden');
+            saveBtn.classList.remove('hidden');
+            listInput.disabled = false;
+            listInput.focus();
+            listInput.select();
+        }), 1000
+    });
+    saveBtn.addEventListener('click', e => {
+        axios.patch(`/api/v1/lists/${listParam}`, {title: listInput.value})
+        .then(res => {
+            setTimeout(() => {
+                saveBtn.classList.add('hidden');
+                editBtn.classList.remove('hidden');
+                listInput.disabled = true;
+            }, 100);
+        }).catch(err => handleError(err));
+    });
+}
+
+axios.get(`/api/v1/tasks/${listParam}`).then(res => {
+    const { listId, listTitle, tasks } = res.data;
+    setListTitle(listTitle, listId);
+    tasks.forEach(task => {
+        addTask(task.title, task._id, task.completed);
+    })
+    refresh();
+}).catch(err => handleError(err));
 
 /* $add form */
 
@@ -122,9 +150,14 @@ const taskInput = document.getElementById('new-task-title');
 
 addBtn.addEventListener('click', e => {
     e.preventDefault();
-    if (taskInput.value) addTask(taskInput.value, Date.now());
-    taskInput.value = '';
-    refresh();
+    if (taskInput.value)
+        axios.post(`/api/v1/tasks/${listParam}`, {title: taskInput.value})
+        .then(res => {
+            const newTask = res.data;
+            addTask(newTask.title, newTask._id);
+            taskInput.value = '';
+            refresh();
+        }).catch(err => handleError(err));
 })
 
 /* settings */

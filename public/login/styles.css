@@ -55,11 +55,11 @@ button, input[type="submit"], input[type="button"]{cursor: pointer;}
   opacity: 1;
 }
 
-#email-validation-box, #password-validation-box {
+#username-validation-box, #password-validation-box {
   color: #e61b1b;
 }
 
-#email-validation-box.show, #password-validation-box.show {
+#username-validation-box.show, #password-validation-box.show {
   background-color: #ffcbcb;
   border: 2px dotted #e61b1b;
   border-radius: 20px;
@@ -68,7 +68,7 @@ button, input[type="submit"], input[type="button"]{cursor: pointer;}
   margin-bottom: 1rem;
 }
 
-form input[type="email"], form input[type="password"] {
+form input[type="password"], form input[type="text"] {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.15rem;
   padding: 0.45em 0 0.35em 0;
@@ -78,12 +78,47 @@ form input[type="email"], form input[type="password"] {
   border-radius: 5px 5px 0 0;
 }
 
-form input[type="email"]:focus, form input[type="password"]:focus {
+#password-section {
+  position: relative;
+  overflow: hidden;
+}
+
+#password-visibility-btn {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 10px;
+  right:  7px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+#password-visiblity-btn:hover {
+  color: red;
+}
+
+#password-visibility-btn .show-pass {
+  display: none;
+}
+
+#password-visibility-btn.show .show-pass {
+  display: inline-block;
+}
+
+#password-visibility-btn.show .hide-pass {
+  display: none;
+}
+
+#password-visibility-btn.show .hide-pass {
+}
+
+form input[type="password"]:focus, form input[type="text"]:focus {
   padding-left: 0.65rem;
   background-color: rgb(241, 241, 241);
 }
 
-form input[type="email"], form input[type="password"] {
+form input[type="password"], form input[type="text"] {
   display: block;
   width: 100%;
   transition: background-color  .2s ease-in-out, padding .2s ease-in-out;

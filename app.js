@@ -12,6 +12,8 @@ const errorHandler = require('./middlewares/error-handler.js');
 const authorize = require('./middlewares/authorize.js');
 const { BadRequestError } = require('./errors/index.js');
 const sanitizeObject = require('./helpers/sanitize.js');
+const { StatusCodes } = require('http-status-codes');
+
 // Import Routers
 const authRouter = require('./routes/auth.js');
 const listsRouter = require('./routes/lists.js');
@@ -42,7 +44,10 @@ app.get(apiPath, (req, res) => {
 app.use(`${apiPath}auth`, authRouter);
 app.use(`${apiPath}lists`, authorize, listsRouter);
 app.use(`${apiPath}tasks`, authorize, tasksRouter);
-
+// route to test if the user is logged in
+app.use(`${apiPath}testauth`, authorize, (req, res) => {
+    res.status(StatusCodes.OK).send(`you are logged in as '${req.user.username}'`);
+});
 
 // Error Handling
 app.use(notFoundMiddleware);

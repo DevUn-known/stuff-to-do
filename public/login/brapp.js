@@ -1,3 +1,7 @@
+axios.get('/api/v1/testAuth').then(res => {
+    window.location.replace('/lists/');
+}).catch(err => undefined);
+
 const loginBtn = document.getElementById('login-btn');
 const forgotPassBtn = document.getElementById('forgot-password-btn');
 const otpMsg = document.getElementById('otp-msg-box');
